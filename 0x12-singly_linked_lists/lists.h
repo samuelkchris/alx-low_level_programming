@@ -1,9 +1,5 @@
-#ifndef HEADER_FILE
-#define HEADER_FILE
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#ifndef LISTS_H
+#define LISTS_H
 
 /**
  * struct list_s - singly linked list
@@ -12,6 +8,7 @@
  * @next: points to the next node
  *
  * Description: singly linked list node structure
+ * for Holberton project
  */
 typedef struct list_s
 {
@@ -27,4 +24,3 @@ list_t *add_node_end(list_t **head, const char *str);
 void free_list(list_t *head);
 
 #endif
-
