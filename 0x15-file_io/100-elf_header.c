@@ -1,6 +1,6 @@
 /**
  * File: 100-elf_header.c
- * Auth: Brennan D Baraban
+ * @e_ident: pointer to an array containg the ELF magic number
  */
 
 #include <sys/elf.h>
