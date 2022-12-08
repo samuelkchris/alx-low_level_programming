@@ -1,52 +1,37 @@
 #include "lists.h"
 
 /**
- * dlistint_len - Computes the elements of a dlistint_t list.
- * @h: Pointer to struct.
+ * delete_dnodeint_at_index - deletes the node at given index of a
+ * dlistint_t linked list
+ * @head: the head of the current dlistint_t list
+ * @index: index of the node to be deleted
  *
- * Return: The number of nodes.
+ * Return: 1 if success, -1 if failed
  */
-size_t dlistint_len(const dlistint_t *h)
-{
-	if (h)
-		return (1 + dlistint_len(h->next));
-	return (0);
-}
-/**
- * delete_dnodeint_at_index - Deletes node of a dlistint_t linked list.
- * @head: Double pointer to struct.
- * @index: Index position to remove node.
- *
- * Return: 1 if it succeeded, -1 if it failed.
- */
+
 int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 {
-	dlistint_t *tmp = *head;
+	dlistint_t *current_node = *head;
 	unsigned int i = 0;
 
-	if (*head == NULL || dlistint_len(tmp) < index + 1)
+	if (*head == NULL)
 		return (-1);
-	if (index == 0)
-	{
-		if (tmp->next)
-			tmp->next->prev = NULL;
-		(*head) = (*head)->next;
-		free(tmp);
-		return (1);
-	}
 
-	while (tmp && i < index)
+	while (current_node != NULL)
 	{
-		tmp = tmp->next;
+		if (i == index)
+		{
+			if (current_node->prev)
+				current_node->prev->next = current_node->next;
+			if (current_node->next)
+				current_node->next->prev = current_node->prev;
+			if (i == 0)
+				*head = current_node->next;
+			free(current_node);
+			return (1);
+		}
+		current_node = current_node->next;
 		i++;
 	}
-
-	if (tmp == NULL)
-		return (-1);
-
-	tmp->prev->next = tmp->next;
-	if (tmp->next)
-		tmp->next->prev = tmp->prev;
-	free(tmp);
-	return (1);
+	return (-1);
 }
